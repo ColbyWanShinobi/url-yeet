@@ -1,0 +1,62 @@
+#!/bin/bash
+
+URL=$1
+RULES_FILE="${HOME}/.config/url-yeet/rules.txt"
+DEFAULT_BROWSER_FILE="${HOME}/.config/url-yeet/default_browser_command.txt"
+ICON_PATH="${HOME}/.local/share/icons/hicolor/256x256/apps/url-yeet.png"
+
+# If there's no URL, exit
+if [ -z "$URL" ]; then
+    notify-send -i "$ICON_PATH" "URL Yeet" "No URL provided."
+    exit 1
+fi
+
+# If the URL is not valid, exit
+if ! [[ "$URL" =~ ^https?:// ]]; then
+    notify-send -i "$ICON_PATH" "URL Yeet" "Invalid URL: $URL"
+    exit 1
+fi
+
+# If there's no rules file, exit
+if [ ! -f ${RULES_FILE} ]; then
+    notify-send -i "$ICON_PATH" "URL Yeet" "Rules file not found: $RULES_FILE"
+    exit 1
+fi
+# If the rules file is empty, exit
+if [ ! -s ${RULES_FILE} ]; then
+    notify-send -i "$ICON_PATH" "URL Yeet" "Rules file is empty: $RULES_FILE"
+    exit 1
+fi
+
+# If there's no default browser file, exit
+if [ ! -f ${DEFAULT_BROWSER_FILE} ]; then
+    notify-send -i "$ICON_PATH" "URL Yeet" "Default browser file not found."
+    exit 1
+fi
+# If the default browser file is empty, exit
+if [ ! -s ${DEFAULT_BROWSER_FILE} ]; then
+    notify-send -i "$ICON_PATH" "URL Yeet" "Default browser file is empty."
+    exit 1
+fi
+
+# Default browser
+DEFAULT_BROWSER=$(head -n 1 ${DEFAULT_BROWSER_FILE})
+
+# Define the URL patterns and corresponding browsers
+declare -A RULES
+
+# Read rules from rules.txt
+while IFS='=' read -r PATTERN BROWSER; do
+    RULES["$PATTERN"]="$BROWSER"
+done < ${RULES_FILE}
+
+# Check the URL against the rules
+for PATTERN in "${!RULES[@]}"; do
+    if [[ "$URL" == *"$PATTERN"* ]]; then
+        ${RULES[$PATTERN]} "$URL"
+        exit 0
+    fi
+done
+
+# Open with the default browser if no match is found
+$DEFAULT_BROWSER "$URL"

@@ -1,0 +1,2 @@
+office.com=flatpak run com.microsoft.Edge
+github.com/ColbyWanShinobi=flatpak run net.waterfox.waterfox

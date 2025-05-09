@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=URL Yeet
+Path=
+Exec=
+Icon=
+Type=Application
+Terminal=false
+MimeType=x-scheme-handler/http;x-scheme-handler/https;
+Categories=Network;WebBrowser
