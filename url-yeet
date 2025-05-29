@@ -53,6 +53,7 @@ done < ${RULES_FILE}
 # Check the URL against the rules
 for PATTERN in "${!RULES[@]}"; do
     if [[ "$URL" == *"$PATTERN"* ]]; then
+        notify-send -i "$ICON_PATH" "URL Yeet" "Opening URL with: ${RULES[$PATTERN]}"
         ${RULES[$PATTERN]} "$URL"
         exit 0
     fi
