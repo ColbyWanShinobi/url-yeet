@@ -11,11 +11,11 @@ cp ${script_dir}/url-yeet.desktop ${HOME}/.local/share/applications/
 chmod +x ${HOME}/.local/share/applications/url-yeet.desktop
 
 # Update the .desktop file to point to the correct script location
-sed -i "s|Exec=.*|Exec=${script_dir}/url-yeet %U|g" ${HOME}/.local/share/applications/url-yeet.desktop
-sed -i "s|Path=.*|Path=${script_dir}|g" ${HOME}/.local/share/applications/url-yeet.desktop
+sed -i "s|Exec=.*|Exec=${HOME}/.local/bin/url-yeet %U|g" ${HOME}/.local/share/applications/url-yeet.desktop
+sed -i "s|Path=.*|Path=${HOME}/.local/bin|g" ${HOME}/.local/share/applications/url-yeet.desktop
 
 # Update the .desktop file to set the correct icon
-sed -i "s|Icon=.*|Icon=${script_dir}/url-yeet.png|g" ${HOME}/.local/share/applications/url-yeet.desktop
+sed -i "s|Icon=.*|Icon=${HOME}/.local/share/icons/hicolor/256x256/apps/url-yeet.png|g" ${HOME}/.local/share/applications/url-yeet.desktop
 
 # Validate the .desktop file
 if command -v desktop-file-validate &> /dev/null
