@@ -1,2 +1,3 @@
 office.com=flatpak run com.microsoft.Edge
 github.com/ColbyWanShinobi=flatpak run net.waterfox.waterfox
+google.com=/usr/sbin/distrobox-enter -n my_distrobox_name -- /usr/bin/microsoft-edge-stable
