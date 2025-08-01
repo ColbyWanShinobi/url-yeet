@@ -34,7 +34,7 @@ chmod +x ${HOME}/.local/bin/url-yeet
 echo "Copying rules file to ${HOME}/.config/url-yeet/"
 mkdir -p ${HOME}/.config/url-yeet
 if [ ! -f ${HOME}/.config/url-yeet/rules.txt ]; then
-    cp ${script_dir}/rules_example.txt ${HOME}/.config/url-yeet/rules.txt
+    cp ${script_dir}/rules.example ${HOME}/.config/url-yeet/rules.txt
 else
     echo "Rules file already exists at ${HOME}/.config/url-yeet/rules.txt, skipping copy."
 fi
